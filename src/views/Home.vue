@@ -1,7 +1,9 @@
 <template>
   <div class="home">
+    <Mainheader />
     <b-container class="centered">
       <img alt="Vue logo" src="../assets/logo.png" />
+
       <Navbar />
       <b-card>
         <h5>Interpolation</h5>
@@ -42,6 +44,13 @@
       </b-card>
       <b-card>
         <h5>Component Communication</h5>
+        <!-- <FormInput v-bind:dataProductName="product_name" /> -->
+        <FormInput
+          :dataProductName="product_name"
+          @changeProductName="product_name = $event"
+        />
+        <br />
+        <label>{{ product_name }}</label>
       </b-card>
     </b-container>
   </div>
@@ -50,16 +59,20 @@
 <script>
 // [1] step pertama import komponen
 import Navbar from '../components/_base/Navbar'
+import Mainheader from '../components/_base/Mainheader'
+import FormInput from '../components/_base/FormInput'
 
 export default {
   name: 'Home',
   // [2] step 2 mendaftarkan komponen yang sudah kita import
   components: {
-    Navbar
+    Navbar,
+    Mainheader,
+    FormInput
   },
   data() {
     return {
-      name: 'Bagus Tri Harjanto',
+      name: 'Ivan Rozak',
       message: 'Hello World',
       rule: 1,
       searchData: 'Sepatu Baru',
@@ -74,7 +87,8 @@ export default {
         }
       ],
       urlGoogle: 'http://google.com',
-      urlYoutube: 'http://youtube.com'
+      urlYoutube: 'http://youtube.com',
+      product_name: 'Sepatu Baru'
     }
   },
   computed: {
@@ -93,6 +107,10 @@ export default {
     search() {
       console.log('Process Search !')
       console.log(this.searchData)
+    },
+    //ini cara ke 2
+    changeNameProduct(event) {
+      this.product_name = event
     }
   }
 }
